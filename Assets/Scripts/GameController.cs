@@ -5,7 +5,7 @@ using System.Collections;
 public class GameController : Singleton<GameController>
 {
     public enum State { Guided, Slideshow }
-    public readonly StateManager<State> state = StateManager<State>.CreateNew(); 
+    public static readonly StateManager<State> state = StateManager<State>.CreateNew(); 
     public static bool isQuitting = false;
 
     readonly CoroutineManager.Item stateSequence = new CoroutineManager.Item();
@@ -16,7 +16,10 @@ public class GameController : Singleton<GameController>
     // Use this for initialization
     void Start()
     {
+        //Subscribe HandleState to state changes
         state.OnChanged += HandleState;
+        //Begin the slideshow
+        state.value = State.Slideshow;
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class GameController : Singleton<GameController>
     /// Handles state changes and assigns a new state IEnumerator.
     /// </summary>
     /// <param name="newState"></param>
-    void HandleState(State newState)
+    private void HandleState(State newState)
     {
         switch(newState)
         {
@@ -45,7 +48,7 @@ public class GameController : Singleton<GameController>
     /// <summary>
     /// Handles keyboard input.
     /// </summary>
-    void HandleInput()
+    private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -61,8 +64,9 @@ public class GameController : Singleton<GameController>
         }
     }
 
-    IEnumerator SlideshowSequence()
+    private IEnumerator SlideshowSequence()
     {
+        Debug.Log("Entered slideshow state at : " + Time.time);
         //While in Slideshow state,
         while (true)
         {
@@ -74,9 +78,9 @@ public class GameController : Singleton<GameController>
 
     }
 
-
-    IEnumerator GuidedSequence()
+    private IEnumerator GuidedSequence()
     {
+        Debug.Log("Entered guided state at : " + Time.time);
         //When the time since the last user input is longer than the delay time,
         while (Time.time - UIManager.timeOfLastInput < switchToSlideshowDelay)
         {

@@ -11,26 +11,39 @@ public class UIManager : Singleton<UIManager>
 
     public static float timeOfLastInput = 0f;
 
+    public PhotoViewer photoViewer;
+
     // Use this for initialization
     void Awake()
     {
         previousButton.onClick.AddListener(ShowPreviousImage);
+        previousButton.onClick.AddListener(RegisterInput);
+
         nextButton.onClick.AddListener(ShowNextImage);
+        nextButton.onClick.AddListener(RegisterInput);
+
+
         quitButton.onClick.AddListener(Quit);
+    }
+
+    public static void RegisterInput()
+    {
+        timeOfLastInput = Time.time;
+        GameController.state.value = GameController.State.Guided;
     }
 
     public static void ShowPreviousImage()
     {
-        timeOfLastInput = Time.time;
+        instance.photoViewer.ShowPreviousImage();
     }
 
     public static void ShowNextImage()
     {
-        timeOfLastInput = Time.time;
+        instance.photoViewer.ShowNextImage();
     }
 
     public static void Quit()
     {
-        
+        Application.Quit();
     }
 }

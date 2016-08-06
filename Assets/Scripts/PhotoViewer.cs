@@ -1,9 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhotoViewer : MonoBehaviour
 {
+    public Image displayImage;
+    public Sprite[] sprites;
+    public int index = 0;
 
     GameObject[] gameObj;
     Texture2D[] textList;
@@ -21,15 +26,32 @@ public class PhotoViewer : MonoBehaviour
 
         files = System.IO.Directory.GetFiles(path, "*.jpg");
 
-        gameObj = GameObject.FindGameObjectsWithTag("Pics");
+        //gameObj = GameObject.FindGameObjectsWithTag("Pics");
 
-        StartCoroutine(LoadImages());
+        //StartCoroutine(LoadImages());
     }
 
-
-    void Update()
+    public void ShowPreviousImage()
     {
+        index--;
+        if (index < 0) index = sprites.Length - 1;
+        ShowImage(index);
+    }
 
+    public void ShowNextImage()
+    {
+        index++;
+        if (index == sprites.Length) index = 0;
+        ShowImage(index);
+    }
+
+    public void ShowImage(int newIndex)
+    {
+        Mathf.Clamp(index, 0, sprites.Length - 1);
+        //Debug.Log(index);
+        displayImage.sprite = sprites[index];
+
+        index = newIndex;
     }
 
     private IEnumerator LoadImages()
