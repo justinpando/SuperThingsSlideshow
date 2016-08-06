@@ -661,7 +661,9 @@ MonoBehaviour:
   previousButton: {fileID: 62274105}
   nextButton: {fileID: 1931012220}
   quitButton: {fileID: 935958357}
+  ui_fadeDelay: 3
   photoViewer: {fileID: 2019798067}
+  fader: {fileID: 2134708044}
 --- !u!1 &1758085148
 GameObject:
   m_ObjectHideFlags: 0
