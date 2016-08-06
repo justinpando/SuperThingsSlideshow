@@ -19,7 +19,7 @@ public class UIManager : Singleton<UIManager>
     CoroutineManager.Item fadeSequence = new CoroutineManager.Item();
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         //Add all input listeners to UI buttons
         previousButton.onClick.AddListener(ShowPreviousImage);

@@ -1095,12 +1095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayImage: {fileID: 2019798065}
-  sprites:
-  - {fileID: 21300000, guid: 1ead83a4ef3b60d49b1f8c93b4cd50b5, type: 3}
-  - {fileID: 21300000, guid: 7ec618868f09f8b40ae028e92cc0f44e, type: 3}
-  - {fileID: 21300000, guid: cd5d4f087c464cf4b8920d43850c2b77, type: 3}
-  - {fileID: 21300000, guid: 0e90ff6bf3a52ed4497acc2089131bb2, type: 3}
-  - {fileID: 21300000, guid: 88dfd5bf0b10d344584a37c920300478, type: 3}
+  sprites: []
   index: 0
 --- !u!1 &2111819830
 GameObject:
